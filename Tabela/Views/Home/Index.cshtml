@@ -1,0 +1,136 @@
+﻿@using Tabela.Models.Domains
+@model Template
+
+@{
+    ViewData["Title"] = "Home Page";
+    var i = 0;
+}
+
+<form class="form-control bg-light border-dark p-5" method="post" action="/Home/SendForm" enctype="multipart/form-data">
+    <div class="container">
+        <div class="row mb-2">
+            <div class="col-12">
+                <span>Id:</span>
+                <input type="text" name="temp.Id" value="@Model.Id" class="form-control" aria-label="Id" />
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-12">
+                <span>Nazwa:</span>
+                <input type="text" name="temp.Name" value="@Model.Name" class="form-control" aria-label="Area" />
+            </div>
+        </div>
+
+        <div class="row d-flex mb-5">
+            <div class="col-4">
+                <span>Data:</span>
+                <input type="datetime" name="temp.DateTime" value="@Model.DateTime" class="form-control" aria-label="DateTimeNow" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-hover bg-white table-bordered center-div-container text-center">
+                    <thead class="">
+                        <tr class="bg-dark text-white align-middle" style="font-size: 0.9rem;">
+                            <th width="5%">1</th>
+                            <th width="5%">2</th>
+                            <th width="50%">3</th>
+                            <th width="10%">4</th>
+                            <th width="10%">5</th>
+                            <th width="10%">6</th>
+                            <th width="10%">7</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var item in Model.Queries)
+                        {
+                            <tr class="p-0">
+                                <td>@(i+1)</td>
+                                <td>
+                                    <input type="number"
+                                           name="temp.Queries[@i].TemplateId"
+                                           value="@Model.Id"
+                                           @* hidden *@ />
+                                </td>
+                                <td>
+                                    <input type="number" 
+                                           name="temp.Queries[@i].Id"
+                                           value="@item.Id"
+                                           @* hidden *@ />
+                                </td>
+                                <td class="text-start px-4">Tabela @(i+1)</td>
+                                <td>
+                                    <input type="radio"
+                                           name="temp.Queries[@i].Radio" 
+                                           @(item.Radio ? "checked" : "")
+                                           value=true
+                                           required 
+                                           class="form-check-input" />
+                                </td>
+                                <td>
+                                    <input type="radio"
+                                           name="temp.Queries[@i].Radio" 
+                                           @(item.Radio ? "" : "checked")
+                                           value=false
+                                           required 
+                                           class="form-check-input" />                                     
+                                </td>
+                                <td>
+                                    <input type="number"
+                                           name="temp.Queries[@i].Counter"
+                                           value="@item.Counter"
+                                           min="0" 
+                                           class="form-control text-center border-0 bg-transparent" />
+                                </td>
+                                <td class="p-2">
+                                    <a href="#" class="uploadLink">Dodaj zdjęcie</a>
+                                    <input type="file" 
+                                           name="temp.Queries[@i].File"
+                                           class="fileInput" 
+                                           hidden />
+                                </td>
+                            </tr>
+
+                            i += 1;
+                        }
+                   </tbody>
+                </table>
+            </div>
+        </div>
+        <button class="btn btn-primary mt-2" type="submit">Prześlij dane</button>
+    </div>
+</form>
+
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+       $(document).ready(function() {
+
+            let uploadLinks = document.querySelectorAll('.uploadLink');
+            let fileInputs = document.querySelectorAll('.fileInput');
+
+            uploadLinks.forEach(function(link, index) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault(); 
+                    fileInputs[index].click();
+                });
+            });
+
+            fileInputs.forEach(function(input, index) {
+                input.addEventListener('change', function() {
+                    if (this.files.length > 0) {
+                        uploadLinks[index].innerHTML = '<img src="icons/camera.png" title="' + this.files[0].name + '" width="50" height="50" />';
+                    }
+                });
+            });
+
+        });
+
+    </script>
+
+}
