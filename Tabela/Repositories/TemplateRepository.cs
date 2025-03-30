@@ -12,18 +12,26 @@ namespace Tabela.Repositories
             _context = context;
         }
 
-        public void AddTemplate(Template template)
+        public void Add(Template template)
         {
-            _context.Templates.Add(template);
+            _context.Templates
+                .Add(template);
             _context.SaveChanges();
         }
 
-        public Template GetTemplateById(int id)
+        public Template GetById(int id)
         {
             return _context.Templates
                 .Include(x => x.Queries)
                 .Where(x => x.Id == id)
                 .FirstOrDefault();
         }
+
+        public void Update(Template template)
+        {
+            _context.Templates.Update(template);
+            _context.SaveChanges();
+        }
+
     }
 }

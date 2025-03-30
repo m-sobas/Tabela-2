@@ -1,7 +1,21 @@
+using Microsoft.AspNetCore.Http.Features;
 using Tabela;
 using Tabela.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Konfiguracja limitu rozmiaru pliku
+//builder.Services.Configure<FormOptions>(options =>
+//{
+//    options.ValueLengthLimit = int.MaxValue;//20971520;  // Ustawienie limitu na 20 MB
+//    options.MultipartBodyLengthLimit = int.MaxValue;//20971520;  // Limit na wielkoœæ pliku w ¿¹daniu
+//});
+
+// Dodatkowa konfiguracja serwera Kestrel (opcjonalnie)
+//builder.WebHost.ConfigureKestrel(options =>
+//{
+//    options.Limits.MaxRequestBodySize = int.MaxValue;  // Ustawienie limitu na 20 MB
+//});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

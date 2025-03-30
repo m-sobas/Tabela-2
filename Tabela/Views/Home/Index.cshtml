@@ -48,19 +48,13 @@
                         {
                             <tr class="p-0">
                                 <td>@(i+1)</td>
-                                <td>
-                                    <input type="number"
-                                           name="temp.Queries[@i].TemplateId"
-                                           value="@Model.Id"
-                                           @* hidden *@ />
+                                <td></td>
+                                <td class="text-start px-4">
+                                    <input type="text" 
+                                        name="temp.Queries[@i].Description"
+                                        value="@item.Description"
+                                        class="form-control text-center border-0 bg-transparent" />
                                 </td>
-                                <td>
-                                    <input type="number" 
-                                           name="temp.Queries[@i].Id"
-                                           value="@item.Id"
-                                           @* hidden *@ />
-                                </td>
-                                <td class="text-start px-4">Tabela @(i+1)</td>
                                 <td>
                                     <input type="radio"
                                            name="temp.Queries[@i].Radio" 
@@ -86,9 +80,9 @@
                                 </td>
                                 <td class="p-2">
                                     <a href="#" class="uploadLink">Dodaj zdjęcie</a>
-                                    <input type="file" 
+                                    <input type="file"
                                            name="temp.Queries[@i].File"
-                                           class="fileInput" 
+                                           class="fileInput"
                                            hidden />
                                 </td>
                             </tr>
@@ -99,7 +93,7 @@
                 </table>
             </div>
         </div>
-        <button class="btn btn-primary mt-2" type="submit">Prześlij dane</button>
+        <button class="btn btn-primary mt-2" type="submit">Zaktualizuj dane</button>
     </div>
 </form>
 

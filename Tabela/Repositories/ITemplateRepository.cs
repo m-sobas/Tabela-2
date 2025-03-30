@@ -4,7 +4,8 @@ namespace Tabela.Repositories
 {
     public interface ITemplateRepository
     {
-        Template GetTemplateById(int id);
-        void AddTemplate(Template template);
+        void Add(Template template);
+        Template GetById(int id);
+        void Update(Template template);
     }
 }
