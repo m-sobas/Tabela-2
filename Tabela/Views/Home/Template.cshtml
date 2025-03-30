@@ -22,7 +22,7 @@
         <div class="row d-flex mb-5">
             <div class="col-4">
                 @Html.LabelFor(x => x.DateTime)
-                @Html.TextBoxFor(x => x.DateTime, new { @class = "form-control", autofocus = "autofocus" })
+                @Html.TextBoxFor(x => x.DateTime, "{0:dd-MM-yyyy}", new { @class = "form-control", autofocus = "autofocus" })
                 @Html.ValidationMessageFor(x => x.Name)
 @*                 <input type="datetime" 
                        name="temp.DateTime" 
